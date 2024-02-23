@@ -1,0 +1,30 @@
+{% extends "_base.html" %}
+{% load static %}
+
+{% block title %}
+    Strona główna - {{ block.super }}
+{% endblock %}
+{% block content %}
+<div id="app">
+
+
+<p v-html="message"></p>
+dawd
+<v-btn>
+    Button
+  </v-btn>
+</div>
+
+
+<script>
+    const { createApp } = Vue
+    const { createVuetify } = Vuetify
+    
+    const vuetify = createVuetify()
+    
+    const app = createApp()
+    app.use(vuetify).mount('#app')
+    
+  </script>
+
+{% endblock%}
