@@ -18,7 +18,7 @@ def index(request):
     context = {}
     context["items_json"] = json.dumps(items)
 
-    return render(request, 'index.html', context)
+    return render(request, 'main/index.html', context)
 
 
 def logout_view(request):

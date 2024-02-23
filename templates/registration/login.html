@@ -1,46 +1,38 @@
-{% extends '_base.html' %}
+{% extends "_base.html" %}
 
 {% block content %}
-  <div id="app" class="d-flex align-center flex-column">
-    <v-card title="Zaloguj się do IssueTrackera" width="800">
-      <form method="POST">
+
+<div class="flex items-center justify-center h-screen">
+    <form method="POST" class="max-w-sm mx-auto">
         {% csrf_token %}
         {% if form.non_field_errors %}
-          <div class="alert alert-danger">
-            {% for error in form.non_field_errors %}
-              <p>{{ error }}</p>
-            {% endfor %}
-          </div>
+            <div class="alert alert-danger">
+                {% for error in form.non_field_errors %}
+                    <p>{{ error }}</p>
+                {% endfor %}
+            </div>
         {% endif %}
-
+        <h5 class="text-lg mb-3 font-normal text-gray-900">Zaloguj się do aplikacji IssueTracking</h5>
         <div class="mb-5">
-          <v-text-field :counter="10" label="Nazwa użytkownika" required name="{{ form.username.name }}" id="{{}}"></v-text-field>
+            <label for="{{ form.username.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nazwa użytkownika</label>
+            <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}"
+                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ form.username.value|default:'' }}">
         </div>
         <div class="mb-5">
-          <v-text-field :counter="10" label="Hasło" required type="password" name="{{ form.password.password }}" id="{{form.password.id_for_label}}"></v-text-field>
+            <label for="{{ form.password.id_for_label }}" class="text-gray-900">Hasło</label>
+            <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}"
+                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         </div>
         <div class="mb-5">
-          <input id="remember" type="checkbox" value="" class="form-checkbox" />
-          <label class="form-label text-gray-900" for="remember">Pamiętaj mnie</label>
+            <input id="remember" type="checkbox" value="" class="form-checkbox">
+            <label class="form-label text-gray-900" for="remember">Pamiętaj mnie</label>
         </div>
-        <v-btn type="submit" block class="mt-2" text="Submit"></v-btn>
+        <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Zaloguj się do konta</button>
         <div class="mb-5">
-          Not registered? <a href="#" class="text-blue-500">Create account</a>
+            Not registered? <a href="#" class="text-blue-500">Create account</a>
         </div>
         <a href="#" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Zgubione hasło</a>
-      </form>
-    </v-card>
-  </div>
-  <div class="flex items-center justify-center h-screen">
-    <form method="POST" class="max-w-sm mx-auto">
-      <div class="mb-5">
-        <label for="{{ form.username.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nazwa użytkownika</label>
-        <input type="text" name="{{ form.username.name }}" id="{{ form.username.id_for_label }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{ form.username.value|default:'' }}" />
-      </div>
-      <div class="mb-5">
-        <label for="{{ form.password.id_for_label }}" class="text-gray-900">Hasło</label>
-        <input type="password" name="{{ form.password.name }}" id="{{ form.password.id_for_label }}" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
-      </div>
     </form>
-  </div>
+</div>
+
 {% endblock %}

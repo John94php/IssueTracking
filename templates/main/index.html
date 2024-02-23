@@ -1,0 +1,17 @@
+<!-- THIS FILE IS ONLY FOR CHECK INTEGRATION WITH DJANGO + VUE + Vuetify-->
+
+{% extends "_auth.html" %}
+
+{% load static %}
+
+{% block title %}
+    Strona główna - {{ block.super }}
+{% endblock %}
+{% block content %}
+{% if user.name %}
+    Witaj, {{ user.name }}
+{% else %}
+    Witaj, {{ user.email }}
+{% endif %}
+Poniżej znajdują się Twoje statystyki
+{% endblock%}
