@@ -1,18 +1,26 @@
 from django.shortcuts import render
 import random
 import json
-def index(request):
-     names = ("bob", "dan", "jack", "lizzy", "susan")
+from django.shortcuts import redirect
+from django.contrib.auth import logout
 
-     items = []
-     for i in range(100):
+def index(request):
+    names = ("bob", "dan", "jack", "lizzy", "susan")
+
+    items = []
+    for i in range(100):
         items.append({
             "name": random.choice(names),
-            "age": random.randint(20,80),
+            "age": random.randint(20, 80),
             "url": "https://example.com",
         })
 
-     context = {}
-     context["items_json"] = json.dumps(items)
+    context = {}
+    context["items_json"] = json.dumps(items)
 
-     return render(request, 'index.html',context)
+    return render(request, 'index.html', context)
+
+
+def logout_view(request):
+    logout(request)
+    return redirect('/')
