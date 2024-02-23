@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
-
+from myProfile import views as profile_views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(
@@ -26,5 +26,6 @@ urlpatterns = [
         name="login"
     ),
     path("main/", views.index, name="main"),
+    path('profile', profile_views.index, name="profile"),
     path("logout/", views.logout_view, name="logout"),
 ]
