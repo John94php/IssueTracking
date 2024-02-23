@@ -1,4 +1,7 @@
+<!-- THIS FILE IS ONLY FOR CHECK INTEGRATION WITH DJANGO + VUE + Vuetify-->
+
 {% extends "_base.html" %}
+
 {% load static %}
 
 {% block title %}
@@ -16,15 +19,6 @@ dawd
 </div>
 
 
-<script>
-    const { createApp } = Vue
-    const { createVuetify } = Vuetify
-    
-    const vuetify = createVuetify()
-    
-    const app = createApp()
-    app.use(vuetify).mount('#app')
-    
-  </script>
+
 
 {% endblock%}
