@@ -7,8 +7,8 @@
     Strona główna - {{ block.super }}
 {% endblock %}
 {% block content %}
-{% if user.name %}
-    Witaj, {{ user.name }}
+{% if user.first_name %}
+    Witaj, {{ user.first_name }} {{user.last_name}}
 {% else %}
     Witaj, {{ user.email }}
 {% endif %}
