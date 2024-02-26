@@ -1,13 +1,16 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import User
 from django.db import models
 
 
-class CustomUser(AbstractUser):
-    # Dodaj nowe pola, na przykład:
+class Profile(models.Model):
     GENDER_CHOICES = [
         ('f', 'Female'),
-        ('m', 'Man'),
+        ('m', 'Male'),
     ]
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=15)
     date_of_birth = models.DateField()
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+
+    class Meta:
+        db_table = "profile"

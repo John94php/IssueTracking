@@ -18,6 +18,7 @@ from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
 from myProfile import views as profile_views
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path(
@@ -27,5 +28,6 @@ urlpatterns = [
     ),
     path("main/", views.index, name="main"),
     path('profile', profile_views.index, name="profile"),
+    path('api/change_password', profile_views.change_password, name="change_password"),
     path("logout/", views.logout_view, name="logout"),
 ]
