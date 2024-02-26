@@ -30,4 +30,5 @@ urlpatterns = [
     path('profile', profile_views.index, name="profile"),
     path('api/change_password', profile_views.change_password, name="change_password"),
     path("logout/", views.logout_view, name="logout"),
+    path('api/logout',views.api_logout,name="api_logout")
 ]

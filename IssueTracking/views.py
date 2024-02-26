@@ -12,3 +12,8 @@ def index(request):
 def logout_view(request):
     logout(request)
     return redirect('/')
+
+
+def api_logout(request):
+    logout(request)
+    return redirect('/')
