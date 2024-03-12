@@ -1244,4 +1244,7 @@ msgid "Password"
 msgstr "Password"
 
 msgid "My Account"
-msgstr ""
+msgstr "My Account"
+
+msgid "Choose language"
+msgstr "Choose language"

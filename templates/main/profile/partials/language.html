@@ -1,15 +1,26 @@
 {% load i18n %}
-<form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+<form action="{% url 'set_language' %}" method="post" class="max-w-sm mx-auto">
+    {% csrf_token %}
     <input name="next" type="hidden" value="{{ redirect_to }}">
-    <select name="language">
+    <div class="mb-5">
+      <label for="language" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{%trans "Choose language" %}</label>
+
+    </div>
+    <div class="mb-5">
+    <select name="language" id="language" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
         {% get_current_language as LANGUAGE_CODE %}
         {% get_available_languages as LANGUAGES %}
         {% get_language_info_list for LANGUAGES as languages %}
         {% for language in languages %}
+
             <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+
                 {{ language.name_local }} ({{ language.code }})
             </option>
         {% endfor %}
     </select>
-    <input type="submit" value="Go">
+
+    </div>
+      <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+
 </form>
