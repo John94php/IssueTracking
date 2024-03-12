@@ -6,6 +6,7 @@ from django.shortcuts import render, redirect
 from .models import Profile
 from django.contrib.auth import update_session_auth_hash, logout
 from django.contrib.auth.forms import PasswordChangeForm
+from django.utils.translation import activate
 
 
 # Create your views here.
@@ -39,3 +40,11 @@ def change_password(request):
             return JsonResponse({'errors': formatted_errors}, status=400)
     else:
         return JsonResponse({'error': 'Metoda żądania nie jest POST.'}, status=400)
+
+
+def change_language(request, language_code):
+    activate(language_code)
+    print(f"Changing language to {language_code}")
+    # Zapisz preferowany język w sesji lub ciasteczkach
+    # Przekieruj użytkownika na stronę, którą chciał przeglądać
+    return redirect(request.META.get('HTTP_REFERER'))

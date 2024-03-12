@@ -52,6 +52,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 ROOT_URLCONF = 'IssueTracking.urls'
@@ -105,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-US'
 
 TIME_ZONE = 'UTC'
 
@@ -134,3 +136,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "main"
 LOGOUT_REDIRECT_URL = "/"
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('pl', 'Polski'),
+]
+
+LOCALE_PATHS = [os.path.join(BASE_DIR, 'locale')]
