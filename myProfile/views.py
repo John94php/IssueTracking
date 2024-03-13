@@ -3,7 +3,7 @@ import time
 
 from django.http import JsonResponse
 from django.shortcuts import render, redirect
-from .models import Profile
+from .models import Profile, Settings
 from django.contrib.auth import update_session_auth_hash, logout
 from django.contrib.auth.forms import PasswordChangeForm
 from django.utils.translation import activate
@@ -44,7 +44,39 @@ def change_password(request):
 
 def change_language(request, language_code):
     activate(language_code)
-    print(f"Changing language to {language_code}")
-    # Zapisz preferowany język w sesji lub ciasteczkach
-    # Przekieruj użytkownika na stronę, którą chciał przeglądać
     return redirect(request.META.get('HTTP_REFERER'))
+
+
+def user_notifications(request):
+    user_id = request.user.id
+
+    # Sprawdź, czy istnieje rekord dla danego user_id
+    try:
+        obj = Settings.objects.get(user_id=user_id)
+    except Settings.DoesNotExist:
+        # Jeśli rekord nie istnieje, stwórz go z domyślnymi wartościami
+        obj = Settings.objects.create(user_id=user_id, app_notifications=0, mail_notifications=0, dark_mode=0)
+
+    app_notifications = request.GET.get('app_notifications')
+    mail_notifications = request.GET.get('mail_notifications')
+    output = ""
+
+    if app_notifications == "on":
+        output = "Wybrano powiadomienia w aplikacji."
+        obj.app_notifications = 1
+    elif app_notifications == "off":
+        output = "Odznaczono powiadomienia w aplikacji."
+        obj.app_notifications = 0
+
+    if mail_notifications == "on":
+        output = "Wybrano powiadomienia mailowe."
+        obj.mail_notifications = 1
+    elif mail_notifications == "off":
+        output = "Odznaczono powiadomienia mailowe."
+        obj.mail_notifications = 0
+
+    # Zawsze ustaw dark_mode na 0
+    obj.dark_mode = 0
+    obj.save()
+
+    return JsonResponse(output, safe=False)

@@ -23,11 +23,11 @@
             <td class="px-6 py-4">
                 <div class="flex items-start mb-5">
                     <div class="flex items-center h-5">
-                        <input id="remember2" type="checkbox" value=""
+                        <input id="email_notifications" type="checkbox" value="" name="mail_notifications"
                                class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
                                />
                     </div>
-                    <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"></label>
+                    <label for="email_notifications" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"></label>
                 </div>
             </td>
 
@@ -40,11 +40,11 @@
             <td class="px-6 py-4">
                 <div class="flex items-start mb-5">
                     <div class="flex items-center h-5">
-                        <input id="remember" type="checkbox" value=""
+                        <input id="app_notifications" type="checkbox" value="" name="app_notifications"
                                class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
                                />
                     </div>
-                    <label for="remember" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"></label>
+                    <label for="app_notifications" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"></label>
                 </div>
             </td>
         </tr>
@@ -52,3 +52,44 @@
         </tbody>
     </table>
 </div>
+<script>
+$("#app_notifications").on('click',function() {
+    const app_cb = document.querySelector('#app_notifications');
+    const app_checked = app_cb.checked;
+    if (app_checked){
+        app_cb.value = "on"
+    } 
+    else {
+        app_cb.value = "off"
+    }
+    $.ajax({
+        url: '/api/user_notifications',
+        data: {"app_notifications": app_cb.value},
+        success: function(message)
+        {
+            console.log(message)
+        }
+    })
+
+})
+$("#email_notifications").on('click',function() {
+    const cb = document.querySelector('#email_notifications');
+    const cb_checked = cb.checked;
+    if (cb_checked){
+        cb.value = "on"
+    } 
+    else {
+        cb.value = "off"
+    }
+    $.ajax({
+        url: '/api/user_notifications',
+        data: {"mail_notifications": cb.value},
+        success: function(message)
+        {
+            console.log(message)
+        }
+    })
+
+})
+
+</script>

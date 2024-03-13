@@ -32,7 +32,8 @@ urlpatterns = i18n_patterns(
     path('api/change_password', profile_views.change_password, name="change_password"),
     path('change_language/<str:language_code>/', profile_views.change_language, name="change_language"),
     path("logout/", views.logout_view, name="logout"),
-    path('api/logout', views.api_logout, name="api_logout")
+    path('api/logout', views.api_logout, name="api_logout"),
+    path('api/user_notifications',profile_views.user_notifications, name="user_notifications")
 )
 urlpatterns += [
     path("i18n/", include("django.conf.urls.i18n"))
