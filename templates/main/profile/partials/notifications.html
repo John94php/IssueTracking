@@ -11,7 +11,7 @@
                 Channel
             </th>
             <th scope="col" class="px-6 py-3">
-                Action
+                enable/disable
             </th>
         </tr>
         </thead>
@@ -19,11 +19,13 @@
         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
             <td class="px-6 py-4">
                 E-mail
+                <input type="hidden" name="mail_notifications_value" id="email_notifications_value" value="{{settings.mail_notifications}}"/>
+
             </td>
             <td class="px-6 py-4">
                 <div class="flex items-start mb-5">
                     <div class="flex items-center h-5">
-                        <input id="email_notifications" type="checkbox" value="" name="mail_notifications"
+                        <input id="email_notifications" type="checkbox" value="0" name="mail_notifications"
                                class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
                                />
                     </div>
@@ -36,11 +38,12 @@
 
             <td class="px-6 py-4">
                 Notifications(in-app)
+                <input type="hidden" name="app_notifications_value" id="app_notifications_value" value="{{settings.app_notifications}}"/>
             </td>
             <td class="px-6 py-4">
                 <div class="flex items-start mb-5">
                     <div class="flex items-center h-5">
-                        <input id="app_notifications" type="checkbox" value="" name="app_notifications"
+                        <input id="app_notifications" type="checkbox" value="0" name="app_notifications"
                                class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
                                />
                     </div>
@@ -53,21 +56,43 @@
     </table>
 </div>
 <script>
+    var app_notifications_value = $("#app_notifications_value").val();
+    var mail_notifications_value = $("#email_notifications_value").val();
+    if (app_notifications_value == 0)
+    {
+        $("#app_notifications").prop('checked',false)
+    } else if(app_notifications_value == 1)
+    {
+        $("#app_notifications").prop('checked',true)
+    }
+    if (mail_notifications_value == 0)
+    {
+        $("#app_notifications").prop('checked',false)
+    } else if(mail_notifications_value == 1)
+    {
+        $("#app_notifications").prop('checked',true)
+    }
+
+
 $("#app_notifications").on('click',function() {
     const app_cb = document.querySelector('#app_notifications');
     const app_checked = app_cb.checked;
     if (app_checked){
-        app_cb.value = "on"
+        app_cb.value = "1"
     } 
     else {
-        app_cb.value = "off"
+        app_cb.value = "0"
     }
     $.ajax({
         url: '/api/user_notifications',
         data: {"app_notifications": app_cb.value},
         success: function(message)
         {
-            console.log(message)
+            Swal.fire({
+                title: "Sukces",
+                html: message,
+                icon: "success"
+              });
         }
     })
 
@@ -76,17 +101,22 @@ $("#email_notifications").on('click',function() {
     const cb = document.querySelector('#email_notifications');
     const cb_checked = cb.checked;
     if (cb_checked){
-        cb.value = "on"
+        cb.value = "1"
     } 
     else {
-        cb.value = "off"
+        cb.value = "0"
     }
     $.ajax({
         url: '/api/user_notifications',
         data: {"mail_notifications": cb.value},
         success: function(message)
         {
-            console.log(message)
+            Swal.fire({
+                title: "Sukces",
+                html: message,
+                icon: "success"
+              });
+
         }
     })
 
