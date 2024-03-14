@@ -1250,3 +1250,18 @@ msgstr "Moje konto"
 
 msgid "Choose language"
 msgstr "Wybierz język"
+
+msgid "My issues"
+msgstr "Moje zadania"
+
+msgid "Projects"
+msgstr "Projekty"
+
+msgid "Applications"
+msgstr "Aplikacje"
+
+msgid "Application settings"
+msgstr "Ustawienia aplikacji"
+
+msgid "Notifications"
+msgstr "Powiadomienia"
