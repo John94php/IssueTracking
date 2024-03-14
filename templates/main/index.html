@@ -8,9 +8,9 @@
 {% endblock %}
 {% block content %}
 {% if user.first_name %}
-    Witaj, {{ user.first_name }} {{user.last_name}}
+  <p class="dark:text-white">  Witaj, {{ user.first_name }} {{user.last_name}}</p>
 {% else %}
-    Witaj, {{ user.email }}
+   <p class="dark:text-white"> Witaj, {{ user.email }}</p>
 {% endif %}
-Poniżej znajdują się Twoje statystyki
+<p class="dark:text-white">Poniżej znajdują się Twoje statystyki</p>
 {% endblock%}
