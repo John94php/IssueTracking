@@ -14,10 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path,include
+from django.urls import path, include
 from . import views
 from django.contrib.auth import views as auth_views
 from myProfile import views as profile_views
+from Issues import views as issues_view
+from AppSettings import views as app_settings_views
 from django.conf.urls.i18n import i18n_patterns
 
 urlpatterns = i18n_patterns(
@@ -28,12 +30,14 @@ urlpatterns = i18n_patterns(
         name="login"
     ),
     path("main/", views.index, name="main"),
-    path('profile', profile_views.index, name="profile"),
+    path('main/profile', profile_views.index, name="profile"),
     path('api/change_password', profile_views.change_password, name="change_password"),
     path('change_language/<str:language_code>/', profile_views.change_language, name="change_language"),
     path("logout/", views.logout_view, name="logout"),
     path('api/logout', views.api_logout, name="api_logout"),
-    path('api/user_notifications',profile_views.user_notifications, name="user_notifications")
+    path('api/user_notifications', profile_views.user_notifications, name="user_notifications"),
+    path("main/app_settings", app_settings_views.index, name="app_settings"),
+
 )
 urlpatterns += [
     path("i18n/", include("django.conf.urls.i18n"))
