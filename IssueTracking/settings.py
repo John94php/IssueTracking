@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'compressor',
-    'myProfile'
+    'myProfile',
+    "Issues",
+    "Projects"
 ]
 
 MIDDLEWARE = [
