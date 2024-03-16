@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'compressor',
     'myProfile',
     "Issues",
-    "Projects"
+    "Projects",
+    "AppSettings"
 ]
 
 MIDDLEWARE = [
